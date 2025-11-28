@@ -1,27 +1,18 @@
 (() => {
-  const menu = document.querySelector("[data-menu]");
-  const openBtn = document.querySelector("[data-menu-open]");
-  const closeBtn = document.querySelector("[data-menu-close]");
-
-  if (!menu || !openBtn || !closeBtn) return;
-
-  const toggleMenu = () => {
-    menu.classList.toggle("is-open");
-    document.body.style.overflow = menu.classList.contains("is-open")
-      ? "hidden"
-      : "";
+  const refs = {
+    // Додати атрибут data-modal-open на кнопку відкриття
+    openModalBtn: document.querySelector("[data-menu-open]"),
+    // Додати атрибут data-modal-close на кнопку закриття
+    closeModalBtn: document.querySelector("[data-menu-close]"),
+    // Додати атрибут data-modal на бекдроп модалки
+    modal: document.querySelector("[data-menu]"),
   };
 
-  openBtn.addEventListener("click", toggleMenu);
-  closeBtn.addEventListener("click", toggleMenu);
+  refs.openModalBtn.addEventListener("click", toggleModal);
+  refs.closeModalBtn.addEventListener("click", toggleModal);
 
-  menu.addEventListener("click", (e) => {
-    if (e.target === menu) toggleMenu();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && menu.classList.contains("is-open")) {
-      toggleMenu();
-    }
-  });
+  function toggleModal() {
+    // is-open це клас який буде додаватися/забиратися на бекдроп при натисканні на кнопки
+    refs.modal.classList.toggle("is-open");
+  }
 })();
